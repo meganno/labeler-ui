@@ -9,10 +9,14 @@ def _load_web_module():
     # reload in development
     if PRODUCTION is False:
         from . import get_epoch
+        '''
         _web_module = idom.web.module_from_file(
             name=f"{MODULE_NAME}.{get_epoch()}",
             file=BUNDLE_PATH,
             fallback=FALLBACK)
+        '''
+        _web_module = idom.web.module_from_url(
+            "https://unpkg.com/labeler-ui@0.0.10/bundle.0.2.0.js")
     # load once in production
     elif _web_module is None:
         _web_module = idom.web.module_from_file(name=f"{MODULE_NAME}",
