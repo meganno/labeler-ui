@@ -20,7 +20,7 @@ package = {
     "packages":
     find_packages(exclude=["dev"]),
     "install_requires": [
-        "idom==0.38.1", "idom-jupyter==0.7.6", "varname==0.8.1",
+        "idom>=0.42,<0.43", "idom-jupyter==0.7.7", "varname==0.8.1",
         "requests==2.26.0", 'urllib3==1.26.6'
     ],
     "include_package_data":
