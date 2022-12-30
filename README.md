@@ -4,8 +4,8 @@
 ![version](https://img.shields.io/badge/labeler--ui%20latest-v1.0.8-blue)
 
 You can use either `SSH` or `HTTPS` to install this python package
-- Run `pip install git+ssh://git@github.com/meganno/labeler-ui.git`
-- Run `pip install git+https://github.com/meganno/labeler-ui.git`
+- Run `pip install git+ssh://git@github.com/rit-git/labeler-ui.git`
+- Run `pip install git+https://github.com/rit-git/labeler-ui.git`
   - You may need to use [personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) instead of password
 - To update the package: add `--upgrade` flag
 - To install a specific version: add `@vx.x.x` tag after the github URL
