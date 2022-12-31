@@ -8,7 +8,7 @@ import {
 import { useContext, useEffect } from "react";
 import { faIcon } from "../icon";
 import { AnnotatorContext } from "../context/AnnotatorContext";
-
+import _ from "lodash";
 export const WidgetModeSwitcher = () => {
     const { annotatorState, annotatorAction } = useContext(AnnotatorContext);
     const widgetMode = _.get(annotatorState, "widgetMode", "annotating");
