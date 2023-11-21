@@ -1,41 +1,44 @@
 import idom
 from varname import argname
+
 from ..idom_loader import load_component
+from . import KERNEL_ID
 
 
 class Annotation:
-
-    def __init__(self,
-                 data: list = [],
-                 config: dict = {},
-                 subset=None,
-                 resultset=None,
-                 service=None):
+    def __init__(
+        self,
+        data: list = [],
+        config: dict = {},
+        subset=None,
+        resultset=None,
+        service=None,
+    ):
         self.__data = data
         self.__config = config
         self.__subset = subset
         self.__resultset = resultset
         self.__service = service
-        if (subset is not None):
+        if subset is not None:
             if type(subset) is str:
                 self.__subset = subset
             else:
-                self.__subset = argname('subset')
+                self.__subset = argname("subset")
         elif resultset is not None:
             if type(resultset) is str:
                 self.__resultset = resultset
             else:
-                self.__resultset = argname('resultset')
+                self.__resultset = argname("resultset")
         if service is not None:
             if type(service) is str:
                 self.__service = service
             else:
-                self.__service = argname('service')
+                self.__service = argname("service")
         elif subset is not None or resultset is not None:
             print(
-                'Service can not be None when widget is initialized under service mode.'
+                "Service can not be None when widget is initialized under service mode."
             )
-        self.__widget = load_component(name='AnnotatorWidget')
+        self.__widget = load_component(name="AnnotationWidget")
 
     def get_data(self):
         return self.__data
@@ -49,18 +52,21 @@ class Annotation:
         subset = None
         # prioritize resultset over subset
         if self.__subset is not None:
-            subset_mode = 'subset'
+            subset_mode = "subset"
             subset = self.__subset
         elif self.__resultset is not None:
-            subset_mode = 'resultset'
+            subset_mode = "resultset"
             subset = self.__resultset
-        if 'height' in self.__config:
-            self.__config['height'] = max(300, self.__config['height'])
-        return self.__widget({
-            "data": self.__data,
-            "config": self.__config,
-            "ipy_set_data": self.__set_data,
-            "ipy_subset": subset,
-            'subset_mode': subset_mode,
-            'ipy_service': self.__service
-        })
+        if "height" in self.__config:
+            self.__config["height"] = max(500, self.__config["height"])
+        return self.__widget(
+            {
+                "data": self.__data,
+                "config": self.__config,
+                "ipy_set_data": self.__set_data,
+                "ipy_subset": subset,
+                "subset_mode": subset_mode,
+                "ipy_service": self.__service,
+                "ipy_kernel_id": KERNEL_ID,
+            }
+        )
