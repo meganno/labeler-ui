@@ -19,6 +19,23 @@ class Annotation:
         self.__subset = subset
         self.__resultset = resultset
         self.__service = service
+        title_mapping = {
+            "annotating": "Annotation",
+            "verifying": "Verification",
+            "reconciling": "Reconciliation",
+        }
+        if "title" not in self.__config and "mode" in self.__config:
+            if self.__config["mode"] in ["annotating", "verifying", "reconciling"]:
+                self.__config["title"] = title_mapping[self.__config["mode"]]
+        if "data_column_width" in self.__config:
+            self.__config["data_column_width"] = max(
+                300.0, float(self.__config["data_column_width"])
+            )
+        if "mode" in self.__config and self.__config["mode"] in [
+            "verifying",
+            "reconciling",
+        ]:
+            self.__config["view"] = "table"
         if subset is not None:
             if type(subset) is str:
                 self.__subset = subset

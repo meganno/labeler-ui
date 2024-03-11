@@ -1,6 +1,6 @@
 import idom
 
-from . import BUNDLE_PATH, FALLBACK, MODULE_NAME, PRODUCTION
+from . import BUNDLE_PATH, FALLBACK, MODULE_NAME, PRODUCTION, VERSION
 
 _web_module = None
 
@@ -16,8 +16,9 @@ def _load_web_module():
         )
     # load once in production
     elif _web_module is None:
-        _web_module = idom.web.module_from_file(
-            name=f"{MODULE_NAME}", file=BUNDLE_PATH, fallback=FALLBACK
+        _web_module = idom.web.module_from_url(
+            url=f"https://labeler-ui.s3.amazonaws.com/labeler_ui@{VERSION}.js",
+            fallback=FALLBACK,
         )
     return _web_module
 
