@@ -20,8 +20,6 @@ class Dashboard:
 
     @idom.component
     def show(self):
-        if "height" in self.__config:
-            self.__config["height"] = max(500, self.__config["height"])
         return self.__widget(
             {
                 "config": self.__config,

@@ -1,6 +1,6 @@
 # labeler-ui
 ## To use in Python Notebook
-![version](https://img.shields.io/badge/labeler--ui%20latest-v1.4.10-blue)
+![version](https://img.shields.io/badge/labeler--ui%20latest-v1.5.5-blue)
 
 You can use either `SSH` or `HTTPS` to install this python package
 - Run `pip install git+ssh://git@github.com/meganno/labeler-ui.git`

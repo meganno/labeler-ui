@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import idom_jupyter  # pyright: ignore
+import idom_jupyter
 
 PRODUCTION = True
 BUNDLE_JS = "bundle.min.js"
@@ -17,6 +17,28 @@ print("labeler-ui: " + VERSION)
 MODULE_NAME = f"labeler_ui@{VERSION}"
 BUNDLE_PATH = Path(__file__).parent / BUNDLE_JS
 FALLBACK = "Failed to display labeler_ui widget."
-from .widgets.Annotation import Annotation  # pyright: ignore
-from .widgets.Authentication import Authentication  # pyright: ignore
-from .widgets.ProjectManager import ProjectManager  # pyright: ignore
+
+# register callback for colab
+try:
+    import IPython
+    from google.colab import output as colab_output
+
+    def labeler_colab_callback(code):
+        import json
+        from contextlib import redirect_stdout
+        from io import StringIO
+
+        colab_callback_result = StringIO()
+        with redirect_stdout(colab_callback_result):
+            exec(code)
+        return IPython.display.JSON(
+            json.loads(colab_callback_result.getvalue().strip())
+        )
+
+    colab_output.register_callback(
+        "notebook.labeler_colab_callback", labeler_colab_callback
+    )
+except Exception as ex:
+    pass
+
+from .widgets.Annotation import Annotation
